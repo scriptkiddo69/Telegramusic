@@ -17,7 +17,7 @@ from aiogram.types import InlineQuery, \
     InputTextMessageContent, InlineQueryResultArticle, InputMediaAudio
 from aioify import aioify
 from mutagen.id3 import ID3, APIC, error
-from mutagen.mp3 import MP3
+from mutagen.flac import FLAC
 from youtube_dl import YoutubeDL
 
 locale.setlocale(locale.LC_TIME, '')
@@ -30,7 +30,7 @@ API_ALBUM = API_URL + "/album/%s"
 API_SEARCH_TRK = API_URL + "/search/track/?q=%s"
 API_PLAYLIST = API_URL + "/playlist/%s"
 
-DEFAULT_QUALITY = "MP3_320"
+DEFAULT_QUALITY = "FLAC"
 
 try:
     os.mkdir("tmp")
@@ -198,7 +198,7 @@ async def get_track(event: types.Message):
             await event.delete()
 
             tmp_song = open(dl.song_path, 'rb')
-            duration = int(MP3(tmp_song).info.length)
+            duration = int(FLAC(tmp_song).info.length)
             await event.answer_audio(tmp_song,
                                      title=tmp_track['title'],
                                      performer=', '.join(tmp_artist_track),
@@ -284,7 +284,7 @@ async def get_album(event: types.Message):
 
                 for i in dl.tracks:
                     tmp_song = open(i.song_path, 'rb')
-                    duration = int(MP3(tmp_song).info.length)
+                    duration = int(FLAC(tmp_song).info.length)
                     group_media.append(InputMediaAudio(media=tmp_song,
                                                        title=tmp_titles[tmp_count],
                                                        performer=', '.join(tmp_artists[tmp_count]),
@@ -295,7 +295,7 @@ async def get_album(event: types.Message):
                 tmp_count = 0
                 for i in dl.tracks:
                     tmp_song = open(i.song_path, 'rb')
-                    duration = int(MP3(tmp_song).info.length)
+                    duration = int(FLAC(tmp_song).info.length)
                     await event.answer_audio(tmp_song,
                                              title=tmp_titles[tmp_count],
                                              performer=', '.join(tmp_artists[tmp_count]),
@@ -378,7 +378,7 @@ async def get_playlist(event: types.Message):
 
             for i in dl.tracks:
                 tmp_song = open(i.song_path, 'rb')
-                duration = int(MP3(tmp_song).info.length)
+                duration = int(FLAC(tmp_song).info.length)
                 await event.answer_audio(tmp_song,
                                          title=tmp_titles[tmp_count],
                                          performer=', '.join(tmp_artists[tmp_count]),
