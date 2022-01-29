@@ -17,4 +17,5 @@ qualities = {
     "FLAC": {
         "n_quality": "4",
         "f_format": ".flac", 
+        "s_quality": "1140"
 }
