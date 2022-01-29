@@ -17,7 +17,7 @@ from aiogram.types import InlineQuery, \
     InputTextMessageContent, InlineQueryResultArticle, InputMediaAudio
 from aioify import aioify
 from mutagen.id3 import ID3, APIC, error
-from mutagen.mp3 import MP3
+
 from youtube_dl import YoutubeDL
 from mutagen.flac import FLAC
 
@@ -379,7 +379,7 @@ async def get_playlist(event: types.Message):
 
             for i in dl.tracks:
                 tmp_song = open(i.song_path, 'rb')
-                duration = int(MP3(tmp_song).info.length)
+                duration = int(FLAC(tmp_song).info.length)
                 await event.answer_audio(tmp_song,
                                          title=tmp_titles[tmp_count],
                                          performer=', '.join(tmp_artists[tmp_count]),
