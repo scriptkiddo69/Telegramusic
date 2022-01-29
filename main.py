@@ -19,6 +19,7 @@ from aioify import aioify
 from mutagen.id3 import ID3, APIC, error
 from mutagen.mp3 import MP3
 from youtube_dl import YoutubeDL
+from mutagen.flac import FLAC
 
 locale.setlocale(locale.LC_TIME, '')
 
@@ -119,7 +120,7 @@ async def get_youtube_audio(event: types.Message):
             tmp_song = open(location, 'rb')
 
             # TAG audio
-            audio = MP3(location, ID3=ID3)
+            audio = FLAC(location, ID3=ID3)
             try:
                 audio.add_tags()
             except error:
