@@ -416,7 +416,7 @@ async def help_start(event: types.Message):
     msg += "_You can use me in inline mode :_\n"
     msg += "@{} \\(album\\|track\\|artist\\) \\<search\\>\n".format(bot_username)
     msg += "Or just send an *Deezer* album or track *link* \\!"
-    await event.answer(msg, parse_mode="MarkdownV2")
+    await event.answer(msg, parse_mode="HTML")
 
 
 @dp.inline_handler()
