@@ -85,7 +85,7 @@ async def get_youtube_audio(event: types.Message):
             ydl_opts = {
                 'outtmpl': 'tmp/yt/%(id)s.%(ext)s',
                 'format': 'bestaudio/best',
-                'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'FLAC', 'preferredquality': '320'}],
+                'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'FLAC', 'preferredquality': '1140'}],
             }
 
             # Download file
@@ -125,7 +125,7 @@ async def get_youtube_audio(event: types.Message):
                 audio.add_tags()
             except error:
                 pass
-            audio.tags.add(APIC(mime='image/jpeg', type=3, desc=u'Cover', data=image_bytes.read()))
+            audio.tags.add(APIC(mime='image/jpeg', type=4, desc=u'Cover', data=image_bytes.read()))
             audio.save()
 
             # Create thumb
