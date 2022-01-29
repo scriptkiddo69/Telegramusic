@@ -1,4 +1,4 @@
-aiogram
+aiogram==2.17.1
 aioify==0.4.0
 deezloader==2021.11.9
 requests==2.26.0
